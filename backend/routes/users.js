@@ -17,7 +17,7 @@ const generateToken = (user) => {
 // Register route
 router.post('/register', async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, name } = req.body;
 
     if (!username || !email || !password) {
       return res.status(400).json({ message: 'All fields are required.' });
@@ -73,6 +73,27 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Error logging in.' });
   }
 });
+
+//TODO: Protect this route, admins only
+// Get all users route
+router.get('/', async (req, res) => {
+  try {
+    // Pagination
+    // We are destructuring the variables from the request. We provide default values if they come empty
+    const { page = 1, limit = 10 } = req.query;
+    const users = await User.find()
+                            .limit(limit * 1) // We multiply by 1 to convert the string to a number
+                            .skip((page - 1) * limit) // We skip the number of documents that we have already retrieved
+                            .sort({ createdAt: -1 }) // We sort the documents by their creation date in descending order
+                            .exec();
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching users.' });
+  }
+});
+
+// Logout route is not implemented. 
 
 // Logout is handled on the client side by removing the token from storage.
 
