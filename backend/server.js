@@ -31,6 +31,14 @@ mongoose.connection.on('disconnected', () => {
   console.log('Mongoose disconnected');
 });
 
+app.get('/', (req, res) => {
+  res.status(200).json(
+    {
+      message: 'Welcome to the API',
+    },
+  );
+});
+
 // Use the router for handling routes
 app.use('/api', router);
 

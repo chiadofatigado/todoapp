@@ -1,25 +1,32 @@
+import { useState } from 'react';
+import { useEffect} from 'react';import 
+{ BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// TODO: Create modules like this in the future
+//import components
+/* import Home from './components/Home';
+import About from './components/About';
+import Login from './components/Login';
+import NotFound from './components/NotFound';
+import Footer from './components/Footer'; */
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+//import logo
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Home />
+      <Footer />
     </div>
   );
 }
-
-export default App;

@@ -9,7 +9,7 @@ function sendErrorResponse(res, statusCode, message) {
   res.status(statusCode).json({ error: message });
 }
 
-
+// /api/users
 router.use('/users', users);
 
 // GET /api/tasks - Get all tasks
