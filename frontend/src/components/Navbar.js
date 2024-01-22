@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 
 export default function Navbar() {
+  const [isActive, setIsActive] = useState(false);
+  
+  const toggleIsActive = () => setIsActive(!isActive);
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -10,14 +14,21 @@ export default function Navbar() {
           <img src="https://files.catbox.moe/cpfb8d.png" width="auto" height="auto" />
         </Link>
 
-        <Link role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <Link 
+        role="button" 
+        className={`navbar-burger ${isActive ? 'is-active' : ''}`} 
+        aria-label="menu" 
+        aria-expanded="false" 
+        data-target="navbarMain"
+        onClick={toggleIsActive}
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </Link>
       </div>
 
-      <div id="navbarMain" className="navbar-menu">
+      <div id="navbarMain" className={`navbar-menu ${isActive ? 'is-active' : ''} `}>
         <div className="navbar-start">
           <Link to="/" className="navbar-item">
             Home
@@ -37,15 +48,9 @@ export default function Navbar() {
                 About
               </Link>
               <Link to="/" className="navbar-item">
-                Jobs
-              </Link>
-              <Link to="/" className="navbar-item">
                 Contact
               </Link>
               <hr className="navbar-divider" />
-              <Link to="/" className="navbar-item">
-                Report an issue
-              </Link>
             </div>
           </div>
         </div>
