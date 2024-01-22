@@ -1,47 +1,51 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+
 export default function Navbar() {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
+        <Link className="navbar-item" to="/">
           <img src="https://files.catbox.moe/cpfb8d.png" width="auto" height="auto" />
-        </a>
+        </Link>
 
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <Link role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </Link>
       </div>
 
       <div id="navbarMain" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item">
+          <Link to="/" className="navbar-item">
             Home
-          </a>
+          </Link>
 
-          <a className="navbar-item">
+          <Link to="/tasks" className="navbar-item">
             Tasks
-          </a>
+          </Link>
 
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">
+            <Link to="/" className="navbar-link">
               More
-            </a>
+            </Link>
 
             <div className="navbar-dropdown">
-              <a className="navbar-item">
+              <Link to="/" className="navbar-item">
                 About
-              </a>
-              <a className="navbar-item">
+              </Link>
+              <Link to="/" className="navbar-item">
                 Jobs
-              </a>
-              <a className="navbar-item">
+              </Link>
+              <Link to="/" className="navbar-item">
                 Contact
-              </a>
+              </Link>
               <hr className="navbar-divider" />
-              <a className="navbar-item">
+              <Link to="/" className="navbar-item">
                 Report an issue
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -49,12 +53,12 @@ export default function Navbar() {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary" href="/signup">
+              <Link className="button is-primary" to="/signup">
                 <strong>Sign up</strong>
-              </a>
-              <a className="button is-light" href="/login">
+              </Link>
+              <Link className="button is-light" to="/login">
                 Log in
-              </a>
+              </Link>
             </div>
           </div>
         </div>

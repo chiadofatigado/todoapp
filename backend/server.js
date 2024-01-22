@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 const app = express();
 
@@ -10,7 +11,8 @@ import router from './routes/index.js';
 
 // Use JSON middleware to parse JSON bodies
 app.use(express.json());
-
+// Use CORS middleware to allow cross-origin requests
+app.use(cors({ origin: 'http://192.168.1.114:3001' }));
 // Database Connection URL from .env file
 const dbURI = process.env.DB_URI;
 
