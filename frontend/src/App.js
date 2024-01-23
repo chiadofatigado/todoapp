@@ -13,6 +13,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Footer from './components/Footer'; */
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NotFound from './components/NotFound';
 import Navbar from './components/Navbar';
@@ -30,6 +31,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} /> {/* Handles unmatched routes */}
         </Routes>
