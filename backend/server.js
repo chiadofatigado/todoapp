@@ -12,7 +12,7 @@ import router from './routes/index.js';
 // Use JSON middleware to parse JSON bodies
 app.use(express.json());
 // Use CORS middleware to allow cross-origin requests
-app.use(cors({ origin: 'http://192.168.1.114:3001' }));
+app.use(cors({ origin: ['http://localhost:3001', 'http://192.168.1.114:3001'] }));
 // Database Connection URL from .env file
 const dbURI = process.env.DB_URI;
 

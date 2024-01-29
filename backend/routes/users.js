@@ -63,6 +63,13 @@ router.post('/login', async (req, res) => {
     }
 
     const token = generateToken(user);
+    
+    res.cookie('userToken', token, {
+      httpOnly: true, // This makes the cookie HTTP-Only
+      // secure: true, // Uncomment this line to make the cookie Secure (only sent over HTTPS)
+      // sameSite: 'strict' // Uncomment this line to make the cookie SameSite
+    });
+
     res.json({
       username: user.username,
       email: user.email,
@@ -71,6 +78,42 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error logging in.' });
+  }
+});
+
+// Get user route
+router.get('/me', async (req, res) => {
+  try {
+    const token = req.cookies.userToken;
+    if (!token) {
+      return res.status(401).json({ message: 'Not authorized.' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    res.json({
+      username: user.username,
+      email: user.email,
+      token: token
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error getting user.' });
+  }
+});
+
+// Logout route
+router.get('/logout', async (req, res) => {
+  try {
+    res.clearCookie('userToken');
+    res.json({ message: 'Logged out.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error logging out.' });
   }
 });
 
