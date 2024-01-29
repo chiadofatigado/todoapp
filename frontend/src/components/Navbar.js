@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 
 export default function Navbar() {
   const [isActive, setIsActive] = useState(false);
+  const { user, logout } = useAuth();
   
   const toggleIsActive = () => setIsActive(!isActive);
 
@@ -31,7 +33,7 @@ export default function Navbar() {
       <div id="navbarMain" className={`navbar-menu ${isActive ? 'is-active' : ''} `}>
         <div className="navbar-start">
           <Link to="/" className="navbar-item">
-            Home
+            Home {user ? `(${user.email})` : ''}
           </Link>
 
           <Link to="/tasks" className="navbar-item">
